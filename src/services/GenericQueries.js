@@ -20,5 +20,8 @@ export default class GenericQueries{
     delete = async(id) =>{
         return this.dao.delete(id,this.model);
     }
+    deleteAll = async() =>{
+        return this.dao.deleteAll(this.model);
+    }
 
 }

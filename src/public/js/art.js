@@ -6,16 +6,16 @@ agregarId = []
 
 fetch('/api/currentUser')
 .then(res => res.json())
-.then(json=>{usuario=json
-    bienvenido.innerHTML = 'Usuario: ' + usuario[0].usuario;
-    avatar.innerHTML = '<img width="100" height="100" src="' + usuario[0].avatar + '">';
+.then(json=>{
+    bienvenido.innerHTML = 'Usuario: ' + json.usuario;
+    avatar.innerHTML = '<img width="100" height="100" src="' + json.avatar + '">';
 })
 
 
 fetch('/api/productos')
 .then(res => res.json())
     .then(info=>{
-        let productos = info.product
+        let productos = info
             productos.map(producto=>{
                 tabla.innerHTML += `
                                     <div class="card " style="width: 18rem;">

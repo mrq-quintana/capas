@@ -14,7 +14,6 @@ import compression from 'compression';
 //IMPORTS JS
 import __dirname from './utils.js';
 import upload from './service/upload.js';
-// import {productos, usuario, mensajes} from './daos/index.js' 
 import { productService ,userService , messageService } from './services/Services.js';
 import products from './routes/products.js';
 import cart from './routes/cart.js'
@@ -77,12 +76,11 @@ app.use(express.static(__dirname+'/public'));
 app.use('/api/productos',products);
 app.use('/api/carritos',cart);
 
-//RUTAS
+
 
 //SESION USUARIO
 app.get('/api/currentUser',isAuthenticated,(req,res)=>{
   let usuarioActual = req.user;
-  console.log(usuarioActual)
   if (usuarioActual) return res.send(usuarioActual)
   else               return res.redirect('/api/login')
 })
@@ -116,8 +114,6 @@ app.get('/api/failedRegister',(req,res)=>{
     res.send({error: -2,message:'Error de autenticacion'}) 
 })
 
-
-
 //LOGIN USUARIO
 app.get('/api/login',(req,res)=>{
   res.render('login')
@@ -145,7 +141,7 @@ app.get('/api/logout', (req,res)=>{
 
 app.get('/api/articulos',(req,res)=>{
   productService.getAll().then(data=>{
-    let result=data.product
+    let result= data.product
     res.render('art', result)
   
  } )

@@ -13,7 +13,7 @@ export const initializePassport = () =>{
         usernameField:"email"
     }, async(req,email,password,done)=>{
         try {
-            let emailUser = await userService.getBy(email);  
+            let emailUser = await userService.getBy({email});  
             if(emailUser)return done(null,false);
             let avatar = req.protocol+"://"+req.hostname+":8080"+'/images/'+req.file.filename;
             const newUser ={
@@ -70,10 +70,9 @@ export const initializePassport = () =>{
     }, 
         async(req,email,password,done)=>{
         try {
-            let user = await userService.getBy(email);
+            let user = await userService.getBy({email});
             if(!user)return done(null,false,{message:'Usuario no existe'});
             if(!passwordNoBcrypt(user,password)) return done(null,false,{message:'Password incorrecto'})
-            console.log('Logueado');
             return done(null,user)
         } catch (error) {
             done(error)
@@ -84,8 +83,8 @@ export const initializePassport = () =>{
         done(null,user._id);
     })
 
-    passport.deserializeUser(async(id,done)=>{
-        let userId = await userService.getBy(id);
+    passport.deserializeUser(async(_id,done)=>{
+        let userId = await userService.getBy({_id});
         done(null,userId);
     })
 }

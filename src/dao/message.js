@@ -5,7 +5,7 @@ export default class Message {
         this.data = data;
     }
     static get model() {
-        return 'carritos';
+        return 'mensajes';
     }
     static get schema() {
         return {

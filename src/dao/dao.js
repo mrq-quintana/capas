@@ -12,15 +12,17 @@ export default class Dao {
 
         const timestamp = { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } };
         const userSchema = mongoose.Schema(User.schema, timestamp);
+        const cartSchema = mongoose.Schema(Cart.schema, timestamp);
+        const productSchema = mongoose.Schema(Product.schema, timestamp);
+        const messageSchema = mongoose.Schema(Message.schema, timestamp);
 
         this.models = {
             [User.model]: mongoose.model(User.model, userSchema),
-            [Cart.model]: mongoose.model(Cart.model, userSchema),
-            [Product.model]: mongoose.model(Product.model, userSchema),
-            [Message.model]: mongoose.model(Message.model, userSchema),
+            [Cart.model]: mongoose.model(Cart.model, cartSchema),
+            [Product.model]: mongoose.model(Product.model, productSchema),
+            [Message.model]: mongoose.model(Message.model, messageSchema),
         }
     }
-
 
     findOne = async(options,entity)=>{
         if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)
@@ -48,12 +50,17 @@ export default class Dao {
         let id = document._id;
         delete document._id;
         let result = await this.models[entity].findByIdAndUpdate(id,{$set:document},{new:true})
-        return result.toObject();
+        return result;
     }
     delete = async(id,entity)=>{
         if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)
         let result = await this.models[entity].findByIdAndDelete(id);
         return result?result.toObject():null;
+    }
+    deleteAll = async(entity)=>{
+        if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)
+        let result = await this.models[entity].deleteMany();
+        return result?result:null;
     }
     exists = async(entity,options)=>{
         if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)

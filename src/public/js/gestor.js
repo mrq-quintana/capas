@@ -9,6 +9,7 @@ function enviarForm(event){
         method:'POST',
         body:data
     }).then(result=>{
+        console.log()
         return result.json();
     }).then(json=>{
         if(json.error === -2){
