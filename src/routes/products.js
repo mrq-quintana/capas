@@ -2,36 +2,36 @@ import express from 'express';
 import upload from '../service/upload.js';
 import { io } from '../app.js';
 import { authAdmin } from '../utils.js'
-import {productos} from '../daos/index.js'
+import { productService } from '../services/Services.js';
 const router = express.Router();
 
 
 //GET
 router.get('/', (req,res)=>{
-    productos.getAll().then((result)=>{
+    productService.getAll().then((result)=>{
         res.send(result);
-        console.log(result.message);
+        console.log(result);
     })
 })
 router.get('/:id', (req,res)=>{
     const usuarioId = req.params.id;
-    productos.getById(usuarioId).then((result)=>{
+    productService.getBy({usuarioId}).then((result)=>{
         res.send(result);
-        console.log(result.message);
+        console.log(result);
     })
 })
 //DELETE
 router.delete('/:id',authAdmin,(req,res)=>{
     const usuarioId = req.params.id;
-    productos.deleteById(usuarioId).then((result)=>{
+    productService.delete({usuarioId}).then((result)=>{
         res.send(result);
-        console.log(result.message);
+        console.log(result);
     })
 })
 router.delete('/', (req,res)=>{
-    productos.deleteAll().then((result)=>{
+    productService.delete().then((result)=>{
         res.send(result);
-        console.log(result.message);
+        console.log(result);
     })
 })
 //POST
@@ -40,10 +40,10 @@ router.post('/',authAdmin,upload.single('image'),(req, res)=>{
     let productoAgregar = req.body;
     let thumbnail = req.protocol+"://"+req.hostname+":8080"+'/images/'+req.file.filename;
     productoAgregar.thumbnail = thumbnail;
-    productos.saveProduct(productoAgregar).then(result=>{
+    productService.save(productoAgregar).then(result=>{
         res.send(result);
         if(result){
-            productos.getAll().then(result=>{
+            productService.getAll().then(result=>{
                 io.emit('actualiza',result);
             })
         }
@@ -53,9 +53,9 @@ router.post('/',authAdmin,upload.single('image'),(req, res)=>{
 router.put('/:pid',authAdmin,(req,res)=>{
     let id = req.params.pid;
     let body = req.body;
-    productos.updateProduct(id,body).then(result=>{
+    productService.updateProduct(id,body).then(result=>{
         res.send(result);
-        console.log(result.message);
+        console.log(result);
     })
 })
 

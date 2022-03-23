@@ -1,20 +1,62 @@
 import mongoose from 'mongoose';
-import config from '../config.js';
+import Cart from './cart.js';
+import User from './user.js';
+import Product from './product.js';
+import Message from './message.js';
 
-export default class Dao{
-    constructor(config){
-        this.mongoose = mongoose.connect(config.mongo.url,{useNewUrlParser:true,useUnifiedTopology:true})
-        .then(()=>{console.log("Mongodb esta conectado");})
-        .catch(()=>{console.log("Mongodb se se ha podido conectar"),process.exit()});
-    
-        const timestamp = {timestamps:{createdAt:'created_at',updatedAt:'updated_at'}};
-        const userSchema = mongoose.Schema(User.schema,timestamp);
+export default class Dao {
+    constructor(config) {
+        this.mongoose = mongoose.connect(config.url, { useNewUrlParser: true, useUnifiedTopology: true })
+            .then(() => { console.log("Mongodb esta conectado"); })
+            .catch(() => { console.log("Mongodb se se ha podido conectar"), process.exit() });
 
-        this.models ={
-            [User.model]:mongoose.model(User.model,userSchema),
-            [Cart.model]:mongoose.model(Cart.model,userSchema),
-            [Product.model]:mongoose.model(Product.model,userSchema),
-            [Message.model]:mongoose.model(Message.model,userSchema),
+        const timestamp = { timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' } };
+        const userSchema = mongoose.Schema(User.schema, timestamp);
+
+        this.models = {
+            [User.model]: mongoose.model(User.model, userSchema),
+            [Cart.model]: mongoose.model(Cart.model, userSchema),
+            [Product.model]: mongoose.model(Product.model, userSchema),
+            [Message.model]: mongoose.model(Message.model, userSchema),
         }
+    }
+
+
+    findOne = async(options,entity)=>{
+        if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)
+        let result  = await this.models[entity].findOne(options);
+        return result?result.toObject():null;
+    }
+    getAll = async(options,entity)=>{
+        if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)
+        let results = await this.models[entity].find(options);
+        return results.map(result=>result.toObject())
+    }
+    insert = async(document,entity)=>{
+        if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)
+        try{
+            let instance = new this.models[entity](document);
+            let result = await instance.save();
+            return result?result.toObject():null;
+        }catch(error){
+            console.log(error);
+            return null;
+        }
+    }
+    update = async(document,entity)=>{
+        if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)
+        let id = document._id;
+        delete document._id;
+        let result = await this.models[entity].findByIdAndUpdate(id,{$set:document},{new:true})
+        return result.toObject();
+    }
+    delete = async(id,entity)=>{
+        if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)
+        let result = await this.models[entity].findByIdAndDelete(id);
+        return result?result.toObject():null;
+    }
+    exists = async(entity,options)=>{
+        if(!this.models[entity]) throw new Error(`La entidad ${entity} no se encuentra en el dao`)
+        return this.models[entity].exists(options)
     }
 }

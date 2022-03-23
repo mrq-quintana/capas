@@ -1,10 +1,12 @@
-import ContenedorMongo from "../contenedor/contenedor.js";
-
-export default class UsersMongo extends ContenedorMongo{
-    constructor(){
-        super(
-            'users',
-            {
+export default class User{
+    constructor(data){
+        this.data = data;
+    }
+    static get model(){
+        return 'users';
+    }
+    static get schema(){
+        return {
             nombre:{ type:String, required:true,},
             apellido:{ type:String, required:true,},
             edad:{ type:Number},
@@ -18,9 +20,7 @@ export default class UsersMongo extends ContenedorMongo{
             carrito:[{
                 type:Boolean,
                 default:true
-            }]    
-            },
-            {timestamps:true},
-        ) 
+            }]
+        }
     }
 }

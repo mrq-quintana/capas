@@ -1,6 +1,7 @@
 import passport from 'passport'
 import local from 'passport-local'
-import {usuario} from '../daos/index.js'
+// import {usuario} from '../daos/index.js'
+import { userService } from '../services/Services.js';
 import { mailing} from '../comunication/gmail.js';
 import { passwordBcrypt, passwordNoBcrypt } from '../utils.js';
 
@@ -12,7 +13,7 @@ export const initializePassport = () =>{
         usernameField:"email"
     }, async(req,email,password,done)=>{
         try {
-            let emailUser = await usuario.getBy(email);  
+            let emailUser = await userService.getBy(email);  
             if(emailUser)return done(null,false);
             let avatar = req.protocol+"://"+req.hostname+":8080"+'/images/'+req.file.filename;
             const newUser ={
@@ -53,7 +54,7 @@ export const initializePassport = () =>{
             mailing(mail);
             mailing(mailadmin);
             try {
-                let user = await usuario.saveUser(newUser);
+                let user = await userService.save(newUser);
                 return done(null,user)
             } catch (error) {
                 return done(error); 
@@ -69,7 +70,7 @@ export const initializePassport = () =>{
     }, 
         async(req,email,password,done)=>{
         try {
-            let user = await usuario.getBy(email);
+            let user = await userService.getBy(email);
             if(!user)return done(null,false,{message:'Usuario no existe'});
             if(!passwordNoBcrypt(user,password)) return done(null,false,{message:'Password incorrecto'})
             console.log('Logueado');
@@ -84,7 +85,7 @@ export const initializePassport = () =>{
     })
 
     passport.deserializeUser(async(id,done)=>{
-        let userId = await usuario.getById(id);
+        let userId = await userService.getBy(id);
         done(null,userId);
     })
 }

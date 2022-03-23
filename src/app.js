@@ -14,7 +14,8 @@ import compression from 'compression';
 //IMPORTS JS
 import __dirname from './utils.js';
 import upload from './service/upload.js';
-import {productos, usuario, mensajes} from './daos/index.js' 
+// import {productos, usuario, mensajes} from './daos/index.js' 
+import { productService ,userService , messageService } from './services/Services.js';
 import products from './routes/products.js';
 import cart from './routes/cart.js'
 import config,{argProcesados} from './config.js';
@@ -50,10 +51,7 @@ export const io = new Server(server);
 
 
 //VIEWS
-// app.set('views',__dirname + '/public/views');
-// app.set('view engine','ejs');
-//VIEWS
-// app.engine('handlebars', engine());
+
 app.engine('handlebars', engine());
 app.set('views',__dirname+'/views');
 app.set('view engine','handlebars');
@@ -144,16 +142,9 @@ app.get('/api/logout', (req,res)=>{
 })
 
 //VISTA ARTICULOS
-// app.get('/api/articulos',(req,res)=>{
-//   productos.getAll()
-    // .then(data=>{
-//     let result={pro:data.product}
-//     res.render('art', result)
-//  } )
-// })
 
 app.get('/api/articulos',(req,res)=>{
-  productos.getAll().then(data=>{
+  productService.getAll().then(data=>{
     let result=data.product
     res.render('art', result)
   
@@ -210,22 +201,22 @@ app.use((req,res,next)=>{
 //SOCKET
 io.on('connection', async socket=>{
     console.log(`El socket ${socket.id} se ha conectado`);
-    let products = await productos.getAll();
+    let products = await productService.getAll();
 
     socket.emit('actualiza', products); 
     socket.on('msj', async data=>{
         console.log(data) 
         console.log(socket.handshake.session.passport.user)
         console.log(socket.handshake.session)
-        let user = await usuario.getBy(socket.handshake.session.user)
+        let user = await userService.getBy(socket.handshake.session.user)
         console.log(user)
         let mjs = {
             user:user.user._id,//ACA ESTA EL ERROR 
             usuario:user.user.usuario,
             message: data.message
         }
-            await mensajes.saveMessage(mjs);
-        const textos = await mensajes.getAll();
+            await messageService.save(mjs);
+        const textos = await messageService.getAll();
         console.log(textos.product)
         io.emit('log',textos.product); 
 

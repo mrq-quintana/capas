@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import config from '../../config.js'
+import config from '../config.js'
 
 mongoose.connect(config.mongo.url,{useNewUrlParser:true,useUnifiedTopology:true})
     .then(()=>{console.log("Mongodb esta conectado");})
