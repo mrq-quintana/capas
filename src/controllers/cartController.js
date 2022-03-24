@@ -11,15 +11,12 @@ const deleteCartById = async(req,res) =>{
         res.send(cart);
 };
 const deleteProductInCart = async(req,res)=>{
-    const idCarrito = req.params.id;
+    const id = req.params.id;
     const id_prod = req.params.id_prod
-    let idProduct = await cartService.deleteProductInCart(idCarrito,id_prod)
+    let idProduct = await cartService.deleteProductInCart({id},{id_prod})
         res.send(idProduct);  
     };
-
-
-
-const saveProduct = async (req, res) => {
+const saveCart = async (req, res) => {
   let productoAgregar = req.body;
   let thumbnail = req.protocol + "://" + req.hostname + ":8080" + "/images/" + req.file.filename;
   productoAgregar.thumbnail = thumbnail;
@@ -34,16 +31,11 @@ const updateProductById = async(req,res)=>{
     let product = await productService.update(id,body)
         res.send(product);
 };
-const deleteAll = async(req,res)=>{
-    let products = await productService.deleteAll();
-    res.send(products);
-}
 
 export default {
   getCartById,
   deleteProductInCart,
   deleteCartById,
-  saveProduct,
-  updateProductById,
-  deleteAll
+  saveCart,
+  updateProductById
 };

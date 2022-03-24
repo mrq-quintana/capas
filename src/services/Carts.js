@@ -6,9 +6,12 @@ export default class CartService extends GenericQueries {
         super(dao, Cart.model)
     }
     
-    deleteProductInCart = async(idCarrito,id_prod) =>{
-        let doc = await this.dao[Cart.model].find({$and:[{_id:idCarrito},{productos:id_prod}]}).count();
+    deleteProductInCart = async(id,id_prod) =>{
+        console.log(id),
+        console.log(id_prod)
+        let doc = await this.dao.models["carritos"].find({$and:[{_id:id.id},{productos:id_prod.id_prod}]}).count();
+        // let doc = await this.dao.models["carritos"].find({_id:id.id});
         console.log(doc)
-        return doc;
+        // return doc;
     }
 }
