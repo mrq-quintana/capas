@@ -341,3 +341,5 @@
 [2022-03-23T11:36:36.966] [WARN] default - GET /images/1647006501611guera.jpg La ruta que desea ingresar no existe
 [2022-03-23T11:38:33.763] [WARN] default - GET /images/1646913430114WhatsApp%20Image%202021-08-25%20at%2013.27.43%20(1).jpeg La ruta que desea ingresar no existe
 [2022-03-23T11:38:34.948] [WARN] default - GET /images/1647006501611guera.jpg La ruta que desea ingresar no existe
+[2022-03-23T20:15:55.441] [WARN] default - GET /favicon.ico La ruta que desea ingresar no existe
+[2022-03-23T20:44:27.113] [WARN] default - GET /api/carritos/ La ruta que desea ingresar no existe
