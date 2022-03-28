@@ -18,10 +18,15 @@ const artView = (req, res) => {
     res.render("art", result);
   });
 };
+const logoutView = (req, res) => {
+    req.logout();
+    res.redirect('/api/views/login');  
+  };
 export default {
   gestorView,
   perfilView,
   registerView,
   loginView,
   artView,
+  logoutView
 };

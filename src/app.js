@@ -78,6 +78,10 @@ app.use('/api/productos',products);
 app.use('/api/carritos',cart);
 app.use('/api/views', views);
 
+//PAGINA DE INICIO
+app.get('/',(req,res)=>{
+  res.redirect('/api/views/articulos')
+})
 
 
 //SESION USUARIO
@@ -87,10 +91,6 @@ app.get('/api/currentUser',isAuthenticated,(req,res)=>{
   else               return res.redirect('/api/login')
 })
 
-//PAGINA DE INICIO
-app.get('/',(req,res)=>{
-  res.redirect('/api/articulos')
-})
 
 //REGISTRO DE USUARIO
 app.post('/api/register',upload.single('image'),passport.authenticate('register',{
@@ -119,11 +119,6 @@ app.post('/api/login',passport.authenticate('login',{
 //FALLA DE LOGIN
 app.post('/api/failedLogin',(req,res)=>{
     res.send({error: -2, message:'Error de Logueo'}) 
-})
-//LOGOUT USUARIO
-app.get('/api/logout', (req,res)=>{
-  req.logout();
-  res.redirect('/api/views/login');   
 })
 
 //INFO
