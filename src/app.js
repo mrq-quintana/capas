@@ -123,19 +123,8 @@ app.post('/api/failedLogin',(req,res)=>{
 //LOGOUT USUARIO
 app.get('/api/logout', (req,res)=>{
   req.logout();
-  res.redirect('/api/login');   
+  res.redirect('/api/views/login');   
 })
-
-//VISTA ARTICULOS
-
-app.get('/api/articulos',(req,res)=>{
-  productService.getAll().then(data=>{
-    let result= data.product
-    res.render('art', result)
-  
- } )
-})
-
 
 //INFO
 app.get('/api/info', (req, res) => {
