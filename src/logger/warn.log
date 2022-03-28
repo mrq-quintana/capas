@@ -343,3 +343,11 @@
 [2022-03-23T11:38:34.948] [WARN] default - GET /images/1647006501611guera.jpg La ruta que desea ingresar no existe
 [2022-03-23T20:15:55.441] [WARN] default - GET /favicon.ico La ruta que desea ingresar no existe
 [2022-03-23T20:44:27.113] [WARN] default - GET /api/carritos/ La ruta que desea ingresar no existe
+[2022-03-28T15:50:23.109] [WARN] default - GET /api/css/styles.css La ruta que desea ingresar no existe
+[2022-03-28T15:50:23.120] [WARN] default - GET /api/js/currentUser.js La ruta que desea ingresar no existe
+[2022-03-28T15:50:23.637] [WARN] default - GET /favicon.ico La ruta que desea ingresar no existe
+[2022-03-28T15:52:47.184] [WARN] default - GET /api/css/styles.css La ruta que desea ingresar no existe
+[2022-03-28T15:52:47.213] [WARN] default - GET /api/js/currentUser.js La ruta que desea ingresar no existe
+[2022-03-28T15:52:47.218] [WARN] default - GET /api/js/gestor.js La ruta que desea ingresar no existe
+[2022-03-28T15:55:05.651] [WARN] default - GET /api/css/styles.css La ruta que desea ingresar no existe
+[2022-03-28T15:55:05.658] [WARN] default - GET /api/js/index.js La ruta que desea ingresar no existe

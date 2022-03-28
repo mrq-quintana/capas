@@ -17,6 +17,7 @@ import upload from './service/upload.js';
 import { productService ,userService , messageService } from './services/Services.js';
 import products from './routes/products.js';
 import cart from './routes/cart.js'
+import views from './routes/views.js'
 import config,{argProcesados} from './config.js';
 import { baseSession } from './config.js';
 import {initializePassport} from './service/passport-config.js';
@@ -75,6 +76,7 @@ app.use(passport.session());
 app.use(express.static(__dirname+'/public'));
 app.use('/api/productos',products);
 app.use('/api/carritos',cart);
+app.use('/api/views', views);
 
 
 
@@ -85,22 +87,12 @@ app.get('/api/currentUser',isAuthenticated,(req,res)=>{
   else               return res.redirect('/api/login')
 })
 
-app.get('/api/perfil',(req,res)=>{
-   res.render('perfil')
-})
-app.get('/api/gestor',(req,res)=>{
-  res.render('gestor')
-})
-
 //PAGINA DE INICIO
 app.get('/',(req,res)=>{
   res.redirect('/api/articulos')
 })
 
 //REGISTRO DE USUARIO
-app.get('/api/register',(req,res)=>{
-  res.render('register')
-})
 app.post('/api/register',upload.single('image'),passport.authenticate('register',{
   failureRedirect:'/api/failedRegister',
   successRedirect:'/api/login',
@@ -115,13 +107,10 @@ app.get('/api/failedRegister',(req,res)=>{
 })
 
 //LOGIN USUARIO
-app.get('/api/login',(req,res)=>{
-  res.render('login')
-})
 
 app.post('/api/login',passport.authenticate('login',{
-  failureRedirect:'/api/login',
-  successRedirect:'/api/perfil',
+  failureRedirect:'/api/views/login',
+  successRedirect:'/api/views/perfil',
 }
 ), async (req,res)=>{
     res.send({message:"Login correcto"});

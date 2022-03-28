@@ -6349,3 +6349,14 @@
 [2022-03-24T17:04:30.729] [INFO] default - DELETE /api/carritos/622abc0b4dba09a3599c1aaa/productos/6229e7960468ba21afdc3ebb
 [2022-03-24T17:05:34.166] [INFO] default - DELETE /api/carritos/622abc0b4dba09a3599c1aaa/productos/6229e7960468ba21afdc3ebb
 [2022-03-24T17:06:48.602] [INFO] default - DELETE /api/carritos/622abc0b4dba09a3599c1aaa/productos/6229e7960468ba21afdc3eb
+[2022-03-28T15:50:22.437] [INFO] default - GET /api/views/perfil
+[2022-03-28T15:50:23.092] [INFO] default - GET /api/css/styles.css
+[2022-03-28T15:50:23.099] [INFO] default - GET /api/js/currentUser.js
+[2022-03-28T15:50:23.631] [INFO] default - GET /favicon.ico
+[2022-03-28T15:52:46.902] [INFO] default - GET /api/views/gestor
+[2022-03-28T15:52:47.170] [INFO] default - GET /api/css/styles.css
+[2022-03-28T15:52:47.193] [INFO] default - GET /api/js/currentUser.js
+[2022-03-28T15:52:47.201] [INFO] default - GET /api/js/gestor.js
+[2022-03-28T15:55:05.339] [INFO] default - GET /api/views/register
+[2022-03-28T15:55:05.627] [INFO] default - GET /api/css/styles.css
+[2022-03-28T15:55:05.638] [INFO] default - GET /api/js/index.js
