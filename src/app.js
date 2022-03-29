@@ -18,6 +18,7 @@ import { productService ,userService , messageService } from './services/Service
 import products from './routes/products.js';
 import cart from './routes/cart.js'
 import views from './routes/views.js'
+import users from './routes/users.js'
 import config,{argProcesados} from './config.js';
 import { baseSession } from './config.js';
 import {initializePassport} from './service/passport-config.js';
@@ -77,6 +78,7 @@ app.use(express.static(__dirname+'/public'));
 app.use('/api/productos',products);
 app.use('/api/carritos',cart);
 app.use('/api/views', views);
+app.use('/api/users', users);
 
 //PAGINA DE INICIO
 app.get('/',(req,res)=>{
