@@ -95,7 +95,7 @@ app.get('/api/currentUser',isAuthenticated,(req,res)=>{
 //REGISTRO DE USUARIO
 app.post('/api/register',upload.single('image'),passport.authenticate('register',{
   failureRedirect:'/api/failedRegister',
-  successRedirect:'/api/login',
+  successRedirect:'/api/views/login',
   passReqToCallback: true
 }
 ),(req,res)=>{ 
