@@ -13,8 +13,8 @@ import compression from 'compression';
 
 //IMPORTS JS
 import __dirname from './utils.js';
-import upload from './service/upload.js';
 import { productService ,userService , messageService } from './services/Services.js';
+import isAuthenticated from './auth/auth.js'
 import products from './routes/products.js';
 import cart from './routes/cart.js'
 import views from './routes/views.js'
@@ -22,7 +22,6 @@ import users from './routes/users.js'
 import config,{argProcesados} from './config.js';
 import { baseSession } from './config.js';
 import {initializePassport} from './service/passport-config.js';
-import { isAuthenticated } from './auth/auth.js';
 import logger from "./logger/logger.js";
 import {mailing} from './comunication/gmail.js';
 import {smsing} from './comunication/sms.js';
@@ -84,44 +83,12 @@ app.use('/api/users', users);
 app.get('/',(req,res)=>{
   res.redirect('/api/views/articulos')
 })
-
-
-//SESION USUARIO
 app.get('/api/currentUser',isAuthenticated,(req,res)=>{
   let usuarioActual = req.user;
   if (usuarioActual) return res.send(usuarioActual)
-  else               return res.redirect('/api/login')
+  else               return res.redirect('/api/views/login')
 })
 
-
-//REGISTRO DE USUARIO
-app.post('/api/register',upload.single('image'),passport.authenticate('register',{
-  failureRedirect:'/api/failedRegister',
-  successRedirect:'/api/views/login',
-  passReqToCallback: true
-}
-),(req,res)=>{ 
-  res.send({message:"Registro correcto"})
-})
-//FALLA DE REGISTRO
-app.get('/api/failedRegister',(req,res)=>{
-    res.send({error: -2,message:'Error de autenticacion'}) 
-})
-
-//LOGIN USUARIO
-
-app.post('/api/login',passport.authenticate('login',{
-  failureRedirect:'/api/views/login',
-  successRedirect:'/api/views/perfil',
-}
-), async (req,res)=>{
-    res.send({message:"Login correcto"});
-})
-
-//FALLA DE LOGIN
-app.post('/api/failedLogin',(req,res)=>{
-    res.send({error: -2, message:'Error de Logueo'}) 
-})
 
 //INFO
 app.get('/api/info', (req, res) => {
@@ -137,8 +104,6 @@ app.get('/api/info', (req, res) => {
     };
     res.send(info);
   });
-
-
 //COMUNICACION
 app.get('/api/mail', (req, res) => {
   mailing().then(result=>{
@@ -158,16 +123,11 @@ app.get('/api/wsp', (req, res) => {
     console.log(result.message);
   });
 });
-
-
-
 //RUTA NO AUTORIZAADA
 app.use((req,res,next)=>{
     res.status(404).send({message:"La ruta que desea ingresar no existe"}) 
     logger.warn(req.method,req.url,"La ruta que desea ingresar no existe" );
 })
-
-
 
 //SOCKET
 io.on('connection', async socket=>{

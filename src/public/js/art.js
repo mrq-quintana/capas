@@ -4,7 +4,7 @@ let tabla = document.getElementById('idProductos')
 let idProducto = document.getElementById('idProducto')
 agregarId = []
 
-fetch('/api/currentUser')
+fetch('/api/users/currentUser')
 .then(res => res.json())
 .then(json=>{
     bienvenido.innerHTML = 'Usuario: ' + json.usuario;
