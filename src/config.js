@@ -28,9 +28,15 @@ export default {
     PORT:argProcesados.port,
     MODE:argProcesados.mode,
 
+    app:{
+        persistence: process.env.PERSISTENCE
+    },
     mongo:{ 
         url:process.env.MONGO_URL||'mongodb://localhost:27017/Ecommerce',
-    }
+    },
+    file:{
+      url:__dirname+'/files/'
+  },
 }
 
 export const baseSession = (session({
