@@ -1,7 +1,7 @@
-import GenericQueries from "./GenericQueries.js";
+import Repository from "./Repository.js";
 import Message from "../dao/message.js"
 
-export default class MessageService extends GenericQueries {
+export default class MessageService extends Repository {
     constructor(dao){
         super(dao, Message.model)
     }

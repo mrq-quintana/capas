@@ -1,7 +1,7 @@
-import GenericQueries from "./GenericQueries.js";
+import Repository from "./Repository.js";
 import Cart from "../dao/cart.js"
 
-export default class CartService extends GenericQueries {
+export default class CartService extends Repository {
     constructor(dao){
         super(dao, Cart.model)
     }
