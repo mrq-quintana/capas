@@ -24,3 +24,4 @@ export const userService = new UserService(dao);
 export const productService = new ProductService(dao);
 export const messageService = new MessageService(dao);
 export const cartService = new CartService(dao);
+

@@ -1,0 +1,30 @@
+[
+  {
+    "nombre": "Maximiliano",
+    "apellido": "Quintana",
+    "email": "maximiliano.quintana@eboxsa.com.ar",
+    "telefono": "+541150123519",
+    "usuario": "MaxiQuin",
+    "password": "$2b$10$EHOXNTgKC9.vbgmKvOj35uZet/3PxNRJNYEiDommK2mrQxfbYBkAq",
+    "edad": "35",
+    "direccion": "Azopardo 3053",
+    "rol": "admin",
+    "avatar": "http://localhost:8080/images/1648754733874Familia.png",
+    "carrito": [],
+    "_id": 1
+  },
+  {
+    "nombre": "Maximiliano",
+    "apellido": "Quintana",
+    "email": "maximiliano.quintana@eboxsa.com.ar",
+    "telefono": "+541150123519",
+    "usuario": "MaxiQuin",
+    "password": "$2b$10$BhcJfolTl0nlpUz5xkq5iusWjTxhwVtmgNK4WvfUMNVhluW.wfbIC",
+    "edad": "35",
+    "direccion": "Azopardo 3053",
+    "rol": "admin",
+    "avatar": "http://localhost:8080/images/1648755480710Familia.png",
+    "carrito": [],
+    "id": 1
+  }
+]

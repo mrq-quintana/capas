@@ -29,10 +29,10 @@ export default {
     MODE:argProcesados.mode,
 
     app:{
-        persistence: process.env.PERSISTENCE
+        persistence:process.env.PERSISTENCE
     },
     mongo:{ 
-        url:process.env.MONGO_URL||'mongodb://localhost:27017/Ecommerce',
+        url:process.env.MONGO_URL
     },
     file:{
       url:__dirname+'/files/'

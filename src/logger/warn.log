@@ -416,3 +416,13 @@
 [2022-03-29T21:53:12.852] [WARN] default - GET /api/currentUser La ruta que desea ingresar no existe
 [2022-03-29T21:54:54.227] [WARN] default - POST /api/users/login La ruta que desea ingresar no existe
 [2022-03-29T21:55:59.959] [WARN] default - POST /api/users/login La ruta que desea ingresar no existe
+[2022-03-31T14:24:24.793] [WARN] default - GET /api/articulos La ruta que desea ingresar no existe
+[2022-03-31T14:24:44.431] [WARN] default - GET /api/products La ruta que desea ingresar no existe
+[2022-03-31T14:38:03.585] [WARN] default - GET /api/carritos La ruta que desea ingresar no existe
+[2022-03-31T14:40:05.200] [WARN] default - GET /api/products La ruta que desea ingresar no existe
+[2022-03-31T14:56:06.870] [WARN] default - GET /api/carritos La ruta que desea ingresar no existe
+[2022-03-31T15:14:50.962] [WARN] default - GET /api/products La ruta que desea ingresar no existe
+[2022-03-31T16:01:23.462] [WARN] default - GET /api/register La ruta que desea ingresar no existe
+[2022-03-31T16:01:23.889] [WARN] default - GET /favicon.ico La ruta que desea ingresar no existe
+[2022-03-31T16:52:40.030] [WARN] default - GET /api/failedRegister La ruta que desea ingresar no existe
+[2022-03-31T16:53:46.645] [WARN] default - GET /api/failedRegister La ruta que desea ingresar no existe

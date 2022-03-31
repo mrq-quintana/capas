@@ -27,7 +27,7 @@ export const initializePassport = () =>{
                 direccion:req.body.direccion,
                 rol:req.body.role,
                 avatar:req.file.path,
-                carrito:[]                     
+                carrito:[]                      
             };
             newUser.avatar = avatar;
 
